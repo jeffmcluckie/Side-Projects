@@ -13,6 +13,7 @@ public class Main {
 
         Dealer dealer = new Dealer();
         dealer.welcome(userAccount);
+        dealer.deposit(userAccount);
         dealer.newGame(userAccount);
     }
 }

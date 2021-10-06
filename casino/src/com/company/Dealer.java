@@ -16,6 +16,9 @@ public class Dealer {
         if (userAccount.getBalance() == 0) {
             System.out.println("Please deposit in order to play.");
         }
+    }
+
+    public void deposit(UserAccount userAccount){
         Scanner newDep = new Scanner(System.in);
         System.out.println("How much would you like to deposit in $?: ");
         String dep = newDep.nextLine();
@@ -32,6 +35,10 @@ public class Dealer {
         if (game.equals("Slots")) {
             SlotMachine slotMachine = new SlotMachine();
             slotMachine.spinSlot(slotMachine.getBet(), slotMachine.getSpins(), userAccount);
+        }
+        if (game.equals("Blackjack")) {
+            Blackjack blackjack = new Blackjack();
+            blackjack.dealHand(blackjack.getBet(), userAccount);
         }
     }
 }
