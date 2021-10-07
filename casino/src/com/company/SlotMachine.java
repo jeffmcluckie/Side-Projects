@@ -35,13 +35,13 @@ public class SlotMachine {
             System.out.println("type: Deposit, ChangeBet or Quit: ");
             String input = depositQuit.nextLine();
             if (input.equals("Deposit")) {
-                Dealer dealer = new Dealer();
-                dealer.deposit(userAccount);
-                dealer.newGame(userAccount);
+                House house = new House();
+                house.deposit(userAccount);
+                house.newGame(userAccount);
             }
             else if(input.equals("ChangeBet")){
-                Dealer dealer = new Dealer();
-                dealer.newGame(userAccount);
+                House house = new House();
+                house.newGame(userAccount);
             }
             else System.out.println("Thank you for playing");
 
@@ -189,8 +189,8 @@ public class SlotMachine {
                 System.out.println("Would you like to play a different game? Y/N: ");
                 String response = yesNo.nextLine();
                 if (response.equals("Y")) {
-                    Dealer dealer = new Dealer();
-                    dealer.newGame(userAccount);
+                    House house = new House();
+                    house.newGame(userAccount);
                 } else System.out.println("Thank you for playing!");
 
                 //make a cash out prompt and display balance

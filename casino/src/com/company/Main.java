@@ -11,10 +11,10 @@ public class Main {
 
         UserAccount userAccount = new UserAccount();
 
-        Dealer dealer = new Dealer();
-        dealer.welcome(userAccount);
-        dealer.deposit(userAccount);
-        dealer.newGame(userAccount);
+        House house = new House();
+        house.welcome(userAccount);
+        house.deposit(userAccount);
+        house.newGame(userAccount);
     }
 }
 
