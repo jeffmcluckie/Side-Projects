@@ -29,6 +29,7 @@ public class Blackjack {
                 house.newGame(userAccount);
             } else {
                 System.out.println("Thank you for playing");
+                System.exit(0);
             }
         }
 
@@ -46,7 +47,6 @@ public class Blackjack {
 
         dealerHand.getCard(playingDeck);
         dealerHand.getCard(playingDeck);
-
         while (true) {
             System.out.println("Dealer Showing:\n" + dealerHand.retrieveCard(0).toString());
             System.out.println("Your Hand:\n" + playerHand.toString());
@@ -73,6 +73,7 @@ public class Blackjack {
                             House house = new House();
                             house.newGame(userAccount);
                         } else System.out.println("Thank you for playing!");
+                        System.exit(0);
                     }
                     break;
                 }
@@ -99,14 +100,15 @@ public class Blackjack {
                     House house = new House();
                     house.newGame(userAccount);
                 } else System.out.println("Thank you for playing!");
+                System.exit(0);
             }
         }
-        while ((dealerHand.getHandValue() < 17)) {
+        while (dealerHand.getHandValue() < 17) {
             dealerHand.getCard(playingDeck);
             System.out.println("Dealer drew a " + dealerHand.retrieveCard(dealerHand.getDeckSize() - 1).toString());
         }
         System.out.println("Dealer's hand value is " + dealerHand.getHandValue());
-        if (dealerHand.getHandValue() > playerHand.getHandValue()) {
+        if (dealerHand.getHandValue() > playerHand.getHandValue() && dealerHand.getHandValue() <= 21) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You lose :(");
             System.out.println("You lost: " + bet);
             userAccount.winLoss(0.0, bet);
@@ -123,6 +125,7 @@ public class Blackjack {
                     House house = new House();
                     house.newGame(userAccount);
                 } else System.out.println("Thank you for playing!");
+                System.exit(0);
             }
         } else if (dealerHand.getHandValue() == playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". Draw.");
@@ -139,12 +142,13 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else System.out.println("Thank you for playing!");
-            }
-        } else if(dealerHand.getHandValue() < playerHand.getHandValue()) {
+                } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                System.exit(0);
+            }}
+        } else if (dealerHand.getHandValue() < playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You won :)");
             System.out.println("You won: " + bet);
-            userAccount.winLoss(bet*2, bet);
+            userAccount.winLoss(bet * 2, bet);
             System.out.println("Your new balance is $" + (userAccount.getBalance()));
             Scanner yesNo = new Scanner(System.in);
             System.out.println("Play again? Y/N: ");
@@ -157,8 +161,28 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else System.out.println("Thank you for playing!");
-            }
+                } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                System.exit(0);
+            }}
+        } else if (dealerHand.getHandValue() > 21) {
+            System.out.println("Dealer BUSTS! You won :)!");
+            System.out.println("You won: " + bet);
+            userAccount.winLoss(bet * 2, bet);
+            System.out.println("Your new balance is $" + (userAccount.getBalance()));
+            Scanner yesNo = new Scanner(System.in);
+            System.out.println("Play again? Y/N: ");
+            String answer = yesNo.nextLine();
+            if (answer.equals("Y")) {
+                playHand(getBet(), userAccount);
+            } else if (answer.equals("N")) {
+                System.out.println("Would you like to play a different game? Y/N: ");
+                String maybe = yesNo.nextLine();
+                if (maybe.equals("Y")) {
+                    House house = new House();
+                    house.newGame(userAccount);
+                } else if(maybe.equals("N")) {System.out.println("Thank you for playing!");
+                System.exit(0);
+            }}
         }
     }
 }

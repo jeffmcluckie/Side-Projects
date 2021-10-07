@@ -44,6 +44,7 @@ public class SlotMachine {
                 house.newGame(userAccount);
             }
             else System.out.println("Thank you for playing");
+            System.exit(0);
 
         } else {
             int[][] grid = new int[5][5];
@@ -192,6 +193,7 @@ public class SlotMachine {
                     House house = new House();
                     house.newGame(userAccount);
                 } else System.out.println("Thank you for playing!");
+                System.exit(0);
 
                 //make a cash out prompt and display balance
 
