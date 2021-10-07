@@ -51,7 +51,7 @@ public class Blackjack {
             System.out.println("Dealer Showing:\n" + dealerHand.retrieveCard(0).toString());
             System.out.println("Your Hand:\n" + playerHand.toString());
             System.out.println("Your Total: " + playerHand.getHandValue());
-            System.out.print("Hit(H) or Stand(S)?: ");
+            System.out.print("Hit(H), Stand(S), or Double(D)?: ");
             String response = choice.nextLine();
             if (response.equals("H")) {
                 playerHand.getCard(playingDeck);
@@ -81,8 +81,138 @@ public class Blackjack {
             if (response.equals("S")) {
                 break;
             }
+            if (response.equals("D")) {
+                if(bet*2 > userAccount.getBalance()){
+                    System.out.println("You do not have enough balance to double this hand");
+                    continue;
+                }
+                playerHand.getCard(playingDeck);
+                System.out.println("You got a: " + playerHand.retrieveCard(playerHand.getDeckSize() - 1).toString());
+                if (playerHand.getHandValue() > 21) {
+                    System.out.println("BUST! Hand value: " + playerHand.getHandValue());
+                    System.out.println("You lost: " + bet * 2);
+                    userAccount.winLoss(0.0, bet * 2);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else System.out.println("Thank you for playing!");
+                        System.exit(0);
+                    }
+                }
+                System.out.println("Dealer Hand:\n" + dealerHand.toString());
+                if (dealerHand.getHandValue() >= 17 && dealerHand.getHandValue() > playerHand.getHandValue()) {
+                    System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You lose :(");
+                    System.out.println("You lost: " + bet*2);
+                    userAccount.winLoss(0.0, bet*2);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else System.out.println("Thank you for playing!");
+                        System.exit(0);
+                    }
+                }
+                while (dealerHand.getHandValue() < 17) {
+                    dealerHand.getCard(playingDeck);
+                    System.out.println("Dealer drew a " + dealerHand.retrieveCard(dealerHand.getDeckSize() - 1).toString());
+                }
+                System.out.println("Dealer's hand value is " + dealerHand.getHandValue());
+                if (dealerHand.getHandValue() > playerHand.getHandValue() && dealerHand.getHandValue() <= 21) {
+                    System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You lose :(");
+                    System.out.println("You lost: " + bet*2);
+                    userAccount.winLoss(0.0, bet*2);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else System.out.println("Thank you for playing!");
+                        System.exit(0);
+                    }
+                } else if (dealerHand.getHandValue() == playerHand.getHandValue()) {
+                    System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". PUSH.");
+                    userAccount.winLoss(bet, bet);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                            System.exit(0);
+                        }}
+                } else if (dealerHand.getHandValue() < playerHand.getHandValue()) {
+                    System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You won :)");
+                    System.out.println("You won: " + bet*2);
+                    userAccount.winLoss(bet * 4, bet);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                            System.exit(0);
+                        }}
+                } else if (dealerHand.getHandValue() > 21) {
+                    System.out.println("Dealer BUSTS! You won :)!");
+                    System.out.println("You won: " + bet*2);
+                    userAccount.winLoss(bet * 4, bet);
+                    System.out.println("Your new balance is $" + (userAccount.getBalance()));
+                    Scanner yesNo = new Scanner(System.in);
+                    System.out.println("Play again? Y/N: ");
+                    String answer = yesNo.nextLine();
+                    if (answer.equals("Y")) {
+                        playHand(getBet(), userAccount);
+                    } else if (answer.equals("N")) {
+                        System.out.println("Would you like to play a different game? Y/N: ");
+                        String maybe = yesNo.nextLine();
+                        if (maybe.equals("Y")) {
+                            House house = new House();
+                            house.newGame(userAccount);
+                        } else if(maybe.equals("N")) {System.out.println("Thank you for playing!");
+                            System.exit(0);
+                        }}
+                }
+            }
         }
-        System.out.println("Dealer Hand: " + dealerHand.toString());
+        System.out.println("Dealer Hand:\n" + dealerHand.toString());
         if (dealerHand.getHandValue() >= 17 && dealerHand.getHandValue() > playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You lose :(");
             System.out.println("You lost: " + bet);
@@ -128,7 +258,7 @@ public class Blackjack {
                 System.exit(0);
             }
         } else if (dealerHand.getHandValue() == playerHand.getHandValue()) {
-            System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". Draw.");
+            System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". PUSH.");
             userAccount.winLoss(bet, bet);
             System.out.println("Your new balance is $" + (userAccount.getBalance()));
             Scanner yesNo = new Scanner(System.in);
@@ -186,25 +316,7 @@ public class Blackjack {
         }
     }
 }
-    /*public void dealHand(double bet, UserAccount userAccount) {
-        Random random = new Random();
-        for (int i = 0; i < ; i++) {
-            // use list
-            // use add. function to add to a "hand"
-            // randomize index (get value at random index)
-        }
-        int randomCard1 = random.nextInt(deck.length);
-        int randomCard2 = random.nextInt(deck.length);
-        int randomCard3 = random.nextInt(deck.length);
-        int randomCard4 = random.nextInt(deck.length);
-        dealerCard1 = dealerCard1.concat(deck[randomCard1]);
-        dealerCard2 = dealerCard2.concat(deck[randomCard2]);
-        playerCard1 = playerCard1.concat(deck[randomCard3]);
-        playerCard2 = playerCard2.concat(deck[randomCard4]);
-        System.out.println("Dealer showing:\n" + dealerCard1);
-        System.out.println("Your hand:\n" + playerCard1 + ", " + playerCard2);
-    }
-}
+
 // create deck of cards
 // ask user for bet amount
 // give 2 random cards to player

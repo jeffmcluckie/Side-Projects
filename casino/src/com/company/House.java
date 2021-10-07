@@ -30,7 +30,7 @@ public class House {
     public static void newGame(UserAccount userAccount){
         Scanner newGame = new Scanner(System.in);
         System.out.println("Please choose a game to play: ");
-        System.out.println("type: Slots, Blackjack... ");
+        System.out.println("type: Slots (or) Blackjack");
         String game = newGame.nextLine();
         if (game.equals("Slots")) {
             SlotMachine slotMachine = new SlotMachine();
