@@ -18,7 +18,7 @@ public class House {
         }
     }
 
-    public void deposit(UserAccount userAccount){
+    public void newDeposit(UserAccount userAccount){
         Scanner newDep = new Scanner(System.in);
         System.out.println("How much would you like to deposit in $?: ");
         String dep = newDep.nextLine();

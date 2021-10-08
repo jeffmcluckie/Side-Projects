@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class SlotMachine {
     private static double totalWinnings;
@@ -36,7 +35,7 @@ public class SlotMachine {
             String input = depositQuit.nextLine();
             if (input.equals("Deposit")) {
                 House house = new House();
-                house.deposit(userAccount);
+                house.newDeposit(userAccount);
                 house.newGame(userAccount);
             }
             else if(input.equals("ChangeBet")){

@@ -1,10 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -13,7 +8,7 @@ public class Main {
 
         House house = new House();
         house.welcome(userAccount);
-        house.deposit(userAccount);
+        house.newDeposit(userAccount);
         house.newGame(userAccount);
     }
 }

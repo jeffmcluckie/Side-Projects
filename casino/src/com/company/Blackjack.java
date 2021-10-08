@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Blackjack {
@@ -22,7 +20,7 @@ public class Blackjack {
             String input = depositQuit.nextLine();
             if (input.equals("Deposit")) {
                 House house = new House();
-                house.deposit(userAccount);
+                house.newDeposit(userAccount);
                 house.newGame(userAccount);
             } else if (input.equals("ChangeBet")) {
                 House house = new House();
