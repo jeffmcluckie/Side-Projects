@@ -9,6 +9,7 @@ public class Main {
         House house = new House();
         house.welcome(userAccount);
         house.newDeposit(userAccount);
+        userAccount.updateFile();
         house.newGame(userAccount);
     }
 }

@@ -42,9 +42,11 @@ public class SlotMachine {
                 House house = new House();
                 house.newGame(userAccount);
             }
-            else System.out.println("Thank you for playing");
-            System.exit(0);
-
+            else {
+                System.out.println("Thank you for playing");
+                userAccount.updateFile();
+                System.exit(0);
+            }
         } else {
             int[][] grid = new int[5][5];
             for (int k = 0; k < spins; k++) {
@@ -191,8 +193,11 @@ public class SlotMachine {
                 if (response.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else System.out.println("Thank you for playing!");
-                System.exit(0);
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
 
                 //make a cash out prompt and display balance
 

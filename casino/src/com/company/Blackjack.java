@@ -49,6 +49,28 @@ public class Blackjack {
             System.out.println("Dealer Showing:\n" + dealerHand.retrieveCard(0).toString());
             System.out.println("Your Hand:\n" + playerHand.toString());
             System.out.println("Your Total: " + playerHand.getHandValue());
+            if(playerHand.getHandValue() == 21) {
+                System.out.println("Blackjack!!! You win: " + bet * 1.5);
+                userAccount.winLoss(bet * 2 * 1.5, bet);
+                System.out.println("Your new balance is $" + userAccount.getBalance());
+                Scanner yesNo = new Scanner(System.in);
+                System.out.println("Play again? Y/N: ");
+                String answer = yesNo.nextLine();
+                if (answer.equals("Y")) {
+                    playHand(getBet(), userAccount);
+                } else if (answer.equals("N")) {
+                    System.out.println("Would you like to play a different game? Y/N: ");
+                    String maybe = yesNo.nextLine();
+                    if (maybe.equals("Y")) {
+                        House house = new House();
+                        house.newGame(userAccount);
+                    } else {
+                        System.out.println("Thank you for playing");
+                        userAccount.updateFile();
+                        System.exit(0);
+                    }
+                }
+            }
             System.out.print("Hit(H), Stand(S), or Double(D)?: ");
             String response = choice.nextLine();
             if (response.equals("H")) {
@@ -70,8 +92,11 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else System.out.println("Thank you for playing!");
-                        System.exit(0);
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
+                            System.exit(0);
+                        }
                     }
                     break;
                 }
@@ -102,8 +127,11 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else System.out.println("Thank you for playing!");
-                        System.exit(0);
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
+                            System.exit(0);
+                        }
                     }
                 }
                 System.out.println("Dealer Hand:\n" + dealerHand.toString());
@@ -123,8 +151,11 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else System.out.println("Thank you for playing!");
-                        System.exit(0);
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
+                            System.exit(0);
+                        }
                     }
                 }
                 while (dealerHand.getHandValue() < 17) {
@@ -148,8 +179,11 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else System.out.println("Thank you for playing!");
-                        System.exit(0);
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
+                            System.exit(0);
+                        }
                     }
                 } else if (dealerHand.getHandValue() == playerHand.getHandValue()) {
                     System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". PUSH.");
@@ -166,9 +200,13 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
                             System.exit(0);
-                        }}
+                        }
+                        }
+                }
                 } else if (dealerHand.getHandValue() < playerHand.getHandValue()) {
                     System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You won :)");
                     System.out.println("You won: " + bet*2);
@@ -185,9 +223,12 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
                             System.exit(0);
-                        }}
+                        }
+                        }
                 } else if (dealerHand.getHandValue() > 21) {
                     System.out.println("Dealer BUSTS! You won :)!");
                     System.out.println("You won: " + bet*2);
@@ -204,12 +245,15 @@ public class Blackjack {
                         if (maybe.equals("Y")) {
                             House house = new House();
                             house.newGame(userAccount);
-                        } else if(maybe.equals("N")) {System.out.println("Thank you for playing!");
+                        } else {
+                            System.out.println("Thank you for playing");
+                            userAccount.updateFile();
                             System.exit(0);
-                        }}
+                        }
+                        }
                 }
             }
-        }
+
         System.out.println("Dealer Hand:\n" + dealerHand.toString());
         if (dealerHand.getHandValue() >= 17 && dealerHand.getHandValue() > playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You lose :(");
@@ -227,8 +271,11 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else System.out.println("Thank you for playing!");
-                System.exit(0);
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
             }
         }
         while (dealerHand.getHandValue() < 17) {
@@ -252,8 +299,11 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else System.out.println("Thank you for playing!");
-                System.exit(0);
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
             }
         } else if (dealerHand.getHandValue() == playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". PUSH.");
@@ -270,9 +320,12 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
-                System.exit(0);
-            }}
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
+            }
         } else if (dealerHand.getHandValue() < playerHand.getHandValue()) {
             System.out.println("Dealer has " + dealerHand.getHandValue() + ", You have " + playerHand.getHandValue() + ". You won :)");
             System.out.println("You won: " + bet);
@@ -289,9 +342,12 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else if(maybe.equals("N")){ System.out.println("Thank you for playing!");
-                System.exit(0);
-            }}
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
+            }
         } else if (dealerHand.getHandValue() > 21) {
             System.out.println("Dealer BUSTS! You won :)!");
             System.out.println("You won: " + bet);
@@ -308,9 +364,12 @@ public class Blackjack {
                 if (maybe.equals("Y")) {
                     House house = new House();
                     house.newGame(userAccount);
-                } else if(maybe.equals("N")) {System.out.println("Thank you for playing!");
-                System.exit(0);
-            }}
+                } else {
+                    System.out.println("Thank you for playing");
+                    userAccount.updateFile();
+                    System.exit(0);
+                }
+            }
         }
     }
 }
