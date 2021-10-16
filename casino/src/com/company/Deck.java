@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-    private ArrayList<Card> cards = new ArrayList<>();
+    private List<Card> cards = new ArrayList<>();
 
     public void fillDeck() {
         for (int i = 0; i < Card.Suit.getSuitLength(); i++) {
@@ -45,6 +45,7 @@ public class Deck {
         return cards.size();
     }
 
+    //@TODO blackjack specific, can separate out to make class more intuitive to use for other games
     public int getHandValue(){
         int value = 0;
         int aces = 0;

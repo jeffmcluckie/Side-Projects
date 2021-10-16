@@ -1,9 +1,6 @@
 package com.company;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class UserAccount {
     private String name;
@@ -42,19 +39,21 @@ public class UserAccount {
     }
 
     public void updateFile(){
-        File log = new File(getName());
+        File log = new File(getName() + ".txt");
         try {
             log.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        PrintWriter dataOutput = null;
-        try {
-            dataOutput = new PrintWriter(new FileWriter(log, true));
-        } catch (IOException e) {
-            e.printStackTrace();
+        try (PrintWriter dataOutput = new PrintWriter(log)) {
+            dataOutput.printf("Name: " + getName() + "\nBalance: " + getBalance());
+        } catch (FileNotFoundException e) {
+            System.err.println("Can not open the file for writing.");
         }
-        dataOutput.printf("Name: " + getName() + "\n Balance: " + getBalance());
+    }
+
+    public void readFromFile(){
+        //@TODO read from file if file exists and sout the balance
     }
 }
